@@ -3,6 +3,7 @@
 COMPILER_OPTIONS="-std=c11 -pedantic -Wall -Wextra -O3"
 
 SOURCES=(
+  "bit_reader"
   "buffer"
   "buffer_reader"
   "header"

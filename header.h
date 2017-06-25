@@ -34,3 +34,8 @@ typedef bool flag;
       return EXIT_FAILURE;                                                       \
     }
 #endif
+
+#define ARRAY_ACTUAL(type, ...) (type[]){__VA_ARGS__}, sizeof((type[]){__VA_ARGS__})/sizeof(type)
+#define ARRAY_FORMAL(type, name) type* __##name##__data, ui __##name##__size
+#define ARRAY_DATA(name)  __##name##__data
+#define ARRAY_SIZE(name)  __##name##__size

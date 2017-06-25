@@ -1,6 +1,6 @@
 #!/bin/sh
 
-COMPILER_OPTIONS="-s -std=c11 -pedantic -Wall -Wextra -O3"
+COMPILER_OPTIONS="-std=c11 -pedantic -Wall -Wextra -O3"
 
 SOURCES=(
   "buffer"
@@ -59,11 +59,11 @@ echo ""
 
 if [ $TESTS_FAILURE -eq 0 ]; then
   for i in ${SOURCES[@]}; do
-    gcc $COMPILER_OPTIONS -c $i.c -o $i.o
+    gcc $COMPILER_OPTIONS -s -c $i.c -o $i.o
   done
 
   for i in ${TARGETS[@]}; do
-    gcc $COMPILER_OPTIONS ${OBJECTS[@]} $i.c -o $i
+    gcc $COMPILER_OPTIONS -s ${OBJECTS[@]} $i.c -o $i
   done
 
   for i in ${SOURCES[@]}; do

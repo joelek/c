@@ -33,11 +33,24 @@ static si set(struct buffer_t* this, ui index, byte value) {
   return EXIT_SUCCESS;
 }
 
+static si set_many(struct buffer_t* this, ui offset, ARRAY_FORMAL(byte, values)) {
+  FAIL_IF(this == NULL);
+  struct state_t* state = this->state;
+  FAIL_IF(state == NULL);
+  FAIL_IF(offset >= state->size);
+  FAIL_IF(offset + ARRAY_SIZE(values) > state->size);
+  for (ui i = 0; i < ARRAY_SIZE(values); i++) {
+    state->data[offset+i] = ARRAY_DATA(values)[i];
+  }
+  return EXIT_SUCCESS;
+}
+
 static const struct buffer_t prototype = {
   .state = NULL,
   .get = get,
   .length = length,
-  .set = set
+  .set = set,
+  .set_many = set_many
 };
 
 static si new(struct buffer_t* this, ui size) {

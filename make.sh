@@ -10,6 +10,7 @@ SOURCES=(
   "lib"
   "ram_buffer"
   "reader"
+  "reader_bit_reader"
 )
 
 TARGETS=(
@@ -19,6 +20,7 @@ TARGETS=(
 TESTS=(
   "buffer_reader_test"
   "ram_buffer_test"
+  "reader_bit_reader_test"
 )
 
 mkdir -p build

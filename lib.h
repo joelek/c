@@ -10,6 +10,7 @@
 #include "header.h"
 #include "ram_buffer.h"
 #include "reader.h"
+#include "reader_bit_reader.h"
 
 #ifdef __cplusplus
   }

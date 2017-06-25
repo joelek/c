@@ -31,7 +31,7 @@ static si read(struct bit_reader_t* this, flag* value) {
   return EXIT_SUCCESS;
 }
 
-static const struct bit_reader_t implementation = {
+static const struct bit_reader_t prototype = {
   .state = NULL,
   .read = read
 };
@@ -43,7 +43,7 @@ static si new(struct bit_reader_t* this, struct reader_t* reader, flag left_to_r
   FAIL_IF(reader == NULL);
   byte* memory = malloc(sizeof(struct state_t));
   FAIL_IF(memory == NULL);
-  *this = implementation;
+  *this = prototype;
   this->state = state = (struct state_t*)(memory);
   state->reader = reader;
   state->current_byte = 0;

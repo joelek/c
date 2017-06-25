@@ -33,7 +33,7 @@ static si set(struct buffer_t* this, ui index, byte value) {
   return EXIT_SUCCESS;
 }
 
-static const struct buffer_t implementation = {
+static const struct buffer_t prototype = {
   .state = NULL,
   .get = get,
   .length = length,
@@ -46,7 +46,7 @@ static si new(struct buffer_t* this, ui size) {
   FAIL_IF(state != NULL);
   byte* memory = malloc(sizeof(struct state_t) + size);
   FAIL_IF(memory == NULL);
-  *this = implementation;
+  *this = prototype;
   this->state = state = (struct state_t*)(memory);
   state->data = (byte*)(memory + sizeof(struct state_t));
   memset(state->data, 0, size);

@@ -22,14 +22,14 @@ TESTS=(
 
 mkdir -p build
 
-for i in ${SOURCES[@]}; do
-  gcc $COMPILER_OPTIONS -DDEBUG -c $i.c -o build/$i.o
-done
-
 OBJECTS=()
 
 for i in ${SOURCES[@]}; do
   OBJECTS+=" build/$i.o"
+done
+
+for i in ${SOURCES[@]}; do
+  gcc $COMPILER_OPTIONS -DDEBUG -c $i.c -o build/$i.o
 done
 
 for i in ${TESTS[@]}; do

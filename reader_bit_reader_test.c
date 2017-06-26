@@ -17,7 +17,7 @@ si read(struct reader_t* this, byte* value) {
   return EXIT_SUCCESS;
 }
 
-si testLeftToRight() {
+si test_left_to_right() {
   struct state_t state = {
     .bytes = { 5, 160 },
     .index = 0
@@ -55,7 +55,7 @@ si testLeftToRight() {
   return EXIT_SUCCESS;
 }
 
-si testRightToLeft() {
+si test_right_to_left() {
   struct state_t state = {
     .bytes = { 5, 160 },
     .index = 0
@@ -94,7 +94,7 @@ si testRightToLeft() {
 }
 
 si main(void) {
-  FAIL_IF(testLeftToRight());
-  FAIL_IF(testRightToLeft());
+  FAIL_IF(test_left_to_right());
+  FAIL_IF(test_right_to_left());
   return EXIT_SUCCESS;
 }

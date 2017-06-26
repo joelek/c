@@ -1,13 +1,13 @@
 #include "ram_buffer.h"
 
-si testLifeCycle() {
+si test_life_cycle() {
   struct buffer_t buffer = buffer_t;
   FAIL_IF(ram_buffer_t.new(&buffer, 2));
   FAIL_IF(ram_buffer_t.old(&buffer));
   return EXIT_SUCCESS;
 }
 
-si testLength() {
+si test_length() {
   struct buffer_t buffer = buffer_t;
   FAIL_IF(ram_buffer_t.new(&buffer, 2));
   ui length;
@@ -17,7 +17,7 @@ si testLength() {
   return EXIT_SUCCESS;
 }
 
-si testGet() {
+si test_get() {
   struct buffer_t buffer = buffer_t;
   FAIL_IF(ram_buffer_t.new(&buffer, 2));
   byte value;
@@ -29,7 +29,7 @@ si testGet() {
   return EXIT_SUCCESS;
 }
 
-si testSet() {
+si test_set() {
   struct buffer_t buffer = buffer_t;
   FAIL_IF(ram_buffer_t.new(&buffer, 2));
   FAIL_IF(buffer.set(&buffer, 0, 1));
@@ -43,7 +43,7 @@ si testSet() {
   return EXIT_SUCCESS;
 }
 
-si testSetMany() {
+si test_set_many() {
   struct buffer_t buffer = buffer_t;
   FAIL_IF(ram_buffer_t.new(&buffer, 2));
   FAIL_IF(buffer.set_many(&buffer, 0, ARRAY_ACTUAL(byte, 1, 2)));
@@ -57,10 +57,10 @@ si testSetMany() {
 }
 
 si main(void) {
-  FAIL_IF(testLifeCycle());
-  FAIL_IF(testLength());
-  FAIL_IF(testGet());
-  FAIL_IF(testSet());
-  FAIL_IF(testSetMany());
+  FAIL_IF(test_life_cycle());
+  FAIL_IF(test_length());
+  FAIL_IF(test_get());
+  FAIL_IF(test_set());
+  FAIL_IF(test_set_many());
   return EXIT_SUCCESS;
 }

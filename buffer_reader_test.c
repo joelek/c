@@ -3,6 +3,7 @@
 si get(struct buffer_t* this, ui index, byte* value) {
   FAIL_IF(this == NULL);
   FAIL_IF(value == NULL);
+  FAIL_IF(index >= 4);
   *value = index;
   return EXIT_SUCCESS;
 }
@@ -19,7 +20,7 @@ struct buffer_t buffer = {
   .length = length
 };
 
-si main(void) {
+si test_read() {
   struct reader_t reader = reader_t;
   FAIL_IF(buffer_reader_t.new(&reader, &buffer));
   byte values[4];
@@ -34,5 +35,10 @@ si main(void) {
   FAIL_IF(values[2] != 2);
   FAIL_IF(values[3] != 3);
   FAIL_IF(buffer_reader_t.old(&reader));
+  return EXIT_SUCCESS;
+}
+
+si main(void) {
+  FAIL_IF(test_read());
   return EXIT_SUCCESS;
 }

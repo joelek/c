@@ -1,5 +1,8 @@
 #!/bin/sh
 
+echo "Arcane build system"
+echo ""
+
 COMPILER_OPTIONS="-std=c11 -pedantic -Wall -Wextra -O3"
 
 SOURCES=(

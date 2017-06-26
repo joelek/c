@@ -8,6 +8,7 @@
 struct vector_t(byte) {
   void* state;
   si (*append)(struct vector_t(byte)* this, byte value);
+  si (*equals)(struct vector_t(byte)* this, struct vector_t(byte)* that, flag* result);
 };
 
 extern const struct vector_t(byte) vector_t(byte);

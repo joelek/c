@@ -37,5 +37,10 @@ typedef bool flag;
 
 #define ARRAY_DATA(name)  __##name##__data
 #define ARRAY_SIZE(name)  __##name##__size
-#define ARRAY_ACTUAL(type, ...) (type[]){__VA_ARGS__}, sizeof((type[]){__VA_ARGS__})/sizeof(type)
-#define ARRAY_FORMAL(type, name) type* ARRAY_DATA(name), ui ARRAY_SIZE(name)
+#define ARRAY_ACTUAL(type, ...) (const type[]){__VA_ARGS__}, sizeof((const type[]){__VA_ARGS__})/sizeof(type)
+#define ARRAY_FORMAL(type, name) const type* ARRAY_DATA(name), ui ARRAY_SIZE(name)
+
+#define STRING_DATA(name)  __##name##__data
+#define STRING_SIZE(name)  __##name##__size
+#define STRING_ACTUAL(...) (const text[]){__VA_ARGS__}, sizeof((const text[]){__VA_ARGS__})/sizeof(text) - 1
+#define STRING_FORMAL(name) const text* STRING_DATA(name), ui STRING_SIZE(name)

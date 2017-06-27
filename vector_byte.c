@@ -6,25 +6,6 @@ struct state_t {
   ui used;
 };
 
-static si dummy_append(struct vector_t(byte)* this, byte value) {
-  (void)(this);
-  (void)(value);
-  FAIL_IF("default interface method called");
-}
-
-static si dummy_equals(struct vector_t(byte)* this, struct vector_t(byte)* that, flag* result) {
-  (void)(this);
-  (void)(that);
-  (void)(result);
-  FAIL_IF("default interface method called");
-}
-
-const struct vector_t(byte) vector_t(byte) = {
-  .state = NULL,
-  .append = dummy_append,
-  .equals = dummy_equals
-};
-
 static si append(struct vector_t(byte)* this, byte value) {
   FAIL_IF(this == NULL);
   struct state_t* state = this->state;
@@ -63,12 +44,6 @@ static si equals(struct vector_t(byte)* this, struct vector_t(byte)* that, flag*
   return EXIT_SUCCESS;
 }
 
-static const struct vector_t(byte) prototype = {
-  .state = NULL,
-  .append = append,
-  .equals = equals
-};
-
 static si new(struct vector_t(byte)* this) {
   FAIL_IF(this == NULL);
   struct state_t* state = this->state;
@@ -76,7 +51,7 @@ static si new(struct vector_t(byte)* this) {
   ui size = 8;
   byte* memory = malloc(sizeof(struct state_t) + size*sizeof(byte));
   FAIL_IF(memory == NULL);
-  *this = prototype;
+  *this = vector_t(byte);
   this->state = state = (struct state_t*)(memory);
   state->data = (byte*)(memory + sizeof(struct state_t));
   state->size = size;
@@ -93,7 +68,10 @@ static si old(struct vector_t(byte)* this) {
   return EXIT_SUCCESS;
 }
 
-const struct vector_impl_t(byte) vector_impl_t(byte) = {
+const struct vector_t(byte) vector_t(byte) = {
+  .state = NULL,
+  .append = append,
+  .equals = equals,
   .new = new,
   .old = old
 };

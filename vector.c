@@ -6,25 +6,6 @@ struct state_t {
   ui used;
 };
 
-static si dummy_append(struct vector_t(GENERIC_TYPE)* this, GENERIC_TYPE value) {
-  (void)(this);
-  (void)(value);
-  FAIL_IF("default interface method called");
-}
-
-static si dummy_equals(struct vector_t(GENERIC_TYPE)* this, struct vector_t(GENERIC_TYPE)* that, flag* result) {
-  (void)(this);
-  (void)(that);
-  (void)(result);
-  FAIL_IF("default interface method called");
-}
-
-const struct vector_t(GENERIC_TYPE) vector_t(GENERIC_TYPE) = {
-  .state = NULL,
-  .append = dummy_append,
-  .equals = dummy_equals
-};
-
 static si append(struct vector_t(GENERIC_TYPE)* this, GENERIC_TYPE value) {
   FAIL_IF(this == NULL);
   struct state_t* state = this->state;
@@ -63,12 +44,6 @@ static si equals(struct vector_t(GENERIC_TYPE)* this, struct vector_t(GENERIC_TY
   return EXIT_SUCCESS;
 }
 
-static const struct vector_t(GENERIC_TYPE) prototype = {
-  .state = NULL,
-  .append = append,
-  .equals = equals
-};
-
 static si new(struct vector_t(GENERIC_TYPE)* this) {
   FAIL_IF(this == NULL);
   struct state_t* state = this->state;
@@ -76,7 +51,7 @@ static si new(struct vector_t(GENERIC_TYPE)* this) {
   ui size = 8;
   byte* memory = malloc(sizeof(struct state_t) + size*sizeof(GENERIC_TYPE));
   FAIL_IF(memory == NULL);
-  *this = prototype;
+  *this = vector_t(GENERIC_TYPE);
   this->state = state = (struct state_t*)(memory);
   state->data = (GENERIC_TYPE*)(memory + sizeof(struct state_t));
   state->size = size;
@@ -93,7 +68,10 @@ static si old(struct vector_t(GENERIC_TYPE)* this) {
   return EXIT_SUCCESS;
 }
 
-const struct vector_impl_t(GENERIC_TYPE) vector_impl_t(GENERIC_TYPE) = {
+const struct vector_t(GENERIC_TYPE) vector_t(GENERIC_TYPE) = {
+  .state = NULL,
+  .append = append,
+  .equals = equals,
   .new = new,
   .old = old
 };

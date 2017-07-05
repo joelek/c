@@ -3,7 +3,7 @@
 echo "Arcane build system"
 echo ""
 
-COMPILER_OPTIONS="-std=c11 -pedantic -Wall -Wextra -O3"
+COMPILER_OPTIONS="-std=c11 -pedantic -Wall -Wextra -O3 -s -D DEBUG"
 
 SOURCES=(
   "bit_reader"
@@ -50,15 +50,11 @@ for i in ${SOURCES[@]}; do
 done
 
 for i in ${SOURCES[@]}; do
-  gcc $COMPILER_OPTIONS -DDEBUG -c $i.c -o build/$i.o
+  gcc $COMPILER_OPTIONS -c $i.c -o build/$i.o
 done
 
 for i in ${TESTS[@]}; do
-  gcc $COMPILER_OPTIONS -DDEBUG ${OBJECTS[@]} $i.c -o build/$i
-done
-
-for i in ${SOURCES[@]}; do
-  rm -f build/$i.o
+  gcc $COMPILER_OPTIONS ${OBJECTS[@]} $i.c -o build/$i
 done
 
 TESTS_SUCCESS=0
@@ -81,17 +77,13 @@ echo "failure: $TESTS_FAILURE"
 echo ""
 
 if [ $TESTS_FAILURE -eq 0 ]; then
-  for i in ${SOURCES[@]}; do
-    gcc $COMPILER_OPTIONS -s -c $i.c -o build/$i.o
-  done
-
   for i in ${TARGETS[@]}; do
-    gcc $COMPILER_OPTIONS -s ${OBJECTS[@]} $i.c -o build/$i
-  done
-
-  for i in ${SOURCES[@]}; do
-    rm -f build/$i.o
+    gcc $COMPILER_OPTIONS ${OBJECTS[@]} $i.c -o build/$i
   done
 fi
+
+for i in ${SOURCES[@]}; do
+  rm -f build/$i.o
+done
 
 exit $TESTS_FAILURE

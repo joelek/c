@@ -6,6 +6,7 @@ echo ""
 COMPILER_OPTIONS="-std=c11 -pedantic -Wall -Wextra -O3 -s -D DEBUG"
 
 SOURCES=(
+  "allocator"
   "bit_reader"
   "buffer"
   "buffer_reader"

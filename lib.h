@@ -4,6 +4,7 @@
   extern "C" {
 #endif
 
+#include "allocator.h"
 #include "bit_reader.h"
 #include "buffer.h"
 #include "buffer_reader.h"

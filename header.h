@@ -23,15 +23,15 @@ typedef char text;
 typedef bool flag;
 
 #ifdef DEBUG
-  #define FAIL_IF(trigger)                                                       \
-    if (trigger) {                                                               \
-      printf("[%s:%u] %s\n", __FILE__, __LINE__, #trigger);                      \
-      return EXIT_FAILURE;                                                       \
+  #define FAIL_IF(trigger)                                                     \
+    if (trigger) {                                                             \
+      printf("[%s:%u] %s\n", __FILE__, __LINE__, #trigger);                    \
+      return EXIT_FAILURE;                                                     \
     }
 #else
-  #define FAIL_IF(trigger)                                                       \
-    if (trigger) {                                                               \
-      return EXIT_FAILURE;                                                       \
+  #define FAIL_IF(trigger)                                                     \
+    if (trigger) {                                                             \
+      return EXIT_FAILURE;                                                     \
     }
 #endif
 

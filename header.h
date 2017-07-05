@@ -35,6 +35,19 @@ typedef bool flag;
     }
 #endif
 
+#define INTERFACE(type) type##__interface
+
+#define DISPATCH(type, method, ...) do {                                       \
+  FAIL_IF(ref == NULL);                                                        \
+  struct type* this = *ref;                                                    \
+  FAIL_IF(this == NULL);                                                       \
+  const struct INTERFACE(type)* interface = this->interface;                   \
+  FAIL_IF(interface == NULL);                                                  \
+  FAIL_IF(interface->method == NULL);                                          \
+  FAIL_IF(interface->method(__VA_ARGS__));                                     \
+  return EXIT_SUCCESS;                                                         \
+} while (0)
+
 #define ARRAY_DATA(name)  __##name##__data
 #define ARRAY_SIZE(name)  __##name##__size
 #define ARRAY_ACTUAL(type, ...) (const type[]){__VA_ARGS__}, sizeof((const type[]){__VA_ARGS__})/sizeof(type)

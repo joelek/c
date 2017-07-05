@@ -36,11 +36,11 @@ GENERATED_HEADERS=()
 for i in ${VECTOR_TYPES[@]}; do
   cat vector.c | sed -e "s/GENERIC_TYPE/$i/g" > vector_$i.c
   cat vector.h | sed -e "s/GENERIC_TYPE/$i/g" > vector_$i.h
-  GENERATED_HEADERS+="#include \"vector_$i.h\""
+  GENERATED_HEADERS+="#include \"vector_$i.h\"\n"
   SOURCES+=" vector_$i"
 done
 
-echo $GENERATED_HEADERS > generated_headers.h
+echo -e $GENERATED_HEADERS > generated_headers.h
 
 mkdir -p build
 
